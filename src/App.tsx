@@ -16,7 +16,7 @@ function App() {
       sx={{
         minWidth: '100vw',
         minHeight: '100vh',
-        bgcolor: 'common.white',
+        bgcolor: 'rgb(240, 237, 234)',
         paddingBottom: 4,
         display: 'flex',
         justifyContent: 'center',

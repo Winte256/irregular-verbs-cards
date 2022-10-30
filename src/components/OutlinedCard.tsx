@@ -17,12 +17,14 @@ const bull = (
 );
 
 const CardContainer = ({
+  title,
   label,
   isFlipped,
   isBack = false,
   children,
 }: {
-  label: React.ReactNode;
+  title?: React.ReactNode;
+  label?: React.ReactNode;
   isFlipped?: boolean;
   isBack?: boolean;
   children: React.ReactNode;
@@ -44,6 +46,7 @@ const CardContainer = ({
       justifyContent: 'center',
       transition: 'transform 0s',
       zIndex: 2,
+      bgcolor: 'common.light',
       '&.is-back': {
         transform: 'rotateY(-180deg)',
       },
@@ -56,9 +59,21 @@ const CardContainer = ({
       },
     }}
   >
-    <Typography variant="h5" component="div" textAlign="center">
-      {label}
-    </Typography>
+    {title && (
+      <Typography
+        variant="h4"
+        component="div"
+        textAlign="center"
+        m="0 0 10px 0"
+      >
+        {title}
+      </Typography>
+    )}
+    {label && (
+      <Typography variant="h5" component="div" textAlign="center">
+        {label}
+      </Typography>
+    )}
     <CardActions
       sx={{
         position: 'absolute',
@@ -100,8 +115,8 @@ export default function OutlinedCard({ goNext, data }: Props) {
   return (
     <Box
       sx={{
-        width: 300,
-        height: 300,
+        width: 320,
+        height: 320,
         perspective: '1000px',
       }}
     >
@@ -124,13 +139,13 @@ export default function OutlinedCard({ goNext, data }: Props) {
           // },
         }}
       >
-        <CardContainer label={front} isFlipped={isFlipped}>
+        <CardContainer title={front} isFlipped={isFlipped}>
           <Button size="small" onClick={() => setFlip(!isFlipped)}>
             Flip!
           </Button>
         </CardContainer>
 
-        <CardContainer label={back} isBack isFlipped={isFlipped}>
+        <CardContainer label={back} title={front} isBack isFlipped={isFlipped}>
           <Button size="small" onClick={goNext}>
             Next!
           </Button>
